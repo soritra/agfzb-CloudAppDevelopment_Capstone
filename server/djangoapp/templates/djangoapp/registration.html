@@ -1,11 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {% load static %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-    <body>
-    <!--Add a registration form here -->
-    </body>
-</html>
+<!-- header -->
+{% include "djangoapp/common/header.html" %}
+
+<body>
+
+    <!-- Navigation bar -->
+    {% include "djangoapp/common/nav.html" %}
+
+    <main class="py-3">
+        <div class="container">
+            <h1>Registration</h1>
+            <hr>
+            <!-- Registration form -->
+            <form action="{% url 'djangoapp:registration' %}" method="post">
+                {% csrf_token %}        
+                <div class="form-group">
+                    <label for="username"><b>User Name</b></label>
+                    <input type="text" class="form-control" name="username" required> 
+                </div>       
+                <div class="form-group">
+                    <label for="firstname"><b>First Name</b></label>
+                    <input type="text" class="form-control" name="firstname" required> 
+                </div>       
+                <div class="form-group">
+                    <label for="lastname"><b>Last Name</b></label>
+                    <input type="text" class="form-control" name="lastname" required>  
+                </div>      
+                <div class="form-group">
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" class="form-control" name="psw" required>
+                </div>
+                {% if message %}
+                <div class="alert alert-warning">
+                    {{ message }}
+                </div>
+                {% endif %}
+                <button class="btn btn-primary" type="submit">Sign up</button>
+            </form>
+            
+            <!-- Section -->
+            <!--div class="section-container section-container-gray-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col section-description">
+                            <h2>Section B</h2>
+                            <p>
+                                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut 
+                                aliquip ex ea commodo consequat.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div-->
+        </div>
+    </main>
+
+    <!-- footer -->
+    {% include "djangoapp/common/footer.html" %}
+        
+    <!-- Javascript -->
+    {% include "djangoapp/common/script.html" %}
+</body>

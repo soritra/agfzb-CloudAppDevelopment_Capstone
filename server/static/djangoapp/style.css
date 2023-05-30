@@ -1,0 +1,25 @@
+* { box-sizing: border-box }
+
+/* Add a gray background color with some padding */
+body {
+  font-family: open-sans, arial, tahoma, sans-serif;
+  padding: 0;
+  background: #ececec;
+}
+
+nav.navbar {
+  background: #2e4e4e;
+}
+
+.footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background: #e3e3e3;
+}
+.footer .logo-footer {
+  width: 40%;
+}
+.footer nav.navbar {
+  background: unset;
+}

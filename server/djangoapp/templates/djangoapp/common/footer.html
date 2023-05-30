@@ -1,0 +1,64 @@
+{% load static %}
+<footer class="footer">
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-lg-4 pt-2 footer-about">
+                    <p class="">
+                        <img class="logo-footer" src="{% static '/djangoapp/img/logo.png' %}" alt="Dealership Review" />
+                    </p>
+                    <p>
+                        We are a young company always looking for new and creative ideas to help you with our products in your everyday work.
+                    </p>
+                    <p><a href="{% url 'djangoapp:about' %}">About Us</a></p>
+                </div>
+                <div class="col-md-4 col-lg-4 pt-2 footer-contact">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Dealership Review 10, 10136 NY</p>
+                    <p><i class="fas fa-phone"></i> Phone: (+1) 123 45 67 89</p>
+                    <p><i class="fas fa-envelope"></i> Email: <a href="mailto:hello@domain.com">hi@dealershipreview.com</a></p>
+                </div>
+                <div class="col-md-4 col-lg-3 pt-2 footer-social">
+                    <h3>Follow us</h3>
+                    <p>
+                        <a href="https://www.meta.com" target="_blank"><i class="fab fa-facebook"></i></a> 
+                        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a> 
+                        <a href="https://www.google.com" target="_blank"><i class="fab fa-google-plus-g"></i></a> 
+                        <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a> 
+                        <a href="https://www.pinterest.com" target="_blank"><i class="fab fa-pinterest"></i></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 footer-copyright">
+                    <p>© Dealership Review</p>
+                </div>
+                   <div class="col-md-7 footer-menu">
+                    <nav class="navbar navbar-dark navbar-expand-md">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link scroll-link" href="#top-content">Top</a>
+                                </li>
+                                <!--li class="nav-item">
+                                    <a class="nav-link scroll-link" href="#section-1">Section 1</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link scroll-link" href="#section-2">Section 2</a>
+                                </li-->
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
