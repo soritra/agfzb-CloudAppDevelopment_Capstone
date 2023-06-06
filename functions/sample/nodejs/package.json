@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node sample.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx eslint . --ext .js --ignore-pattern node_modules/"
   },
@@ -12,7 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@cloudant/cloudant": "^4.4.0"
+    "@cloudant/cloudant": "^4.4.0",
+    "@ibm-cloud/cloudant": "^0.5.2"
   },
   "devDependencies": {
     "eslint": "^8.27.0"

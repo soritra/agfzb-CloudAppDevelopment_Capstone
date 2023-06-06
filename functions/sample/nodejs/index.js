@@ -13,6 +13,7 @@
    cloudant.setServiceUrl(params.COUCH_URL);
  
    let dbList = getDbs(cloudant);
+   console.log(dbList)
    return { dbs: dbList };
  }
  

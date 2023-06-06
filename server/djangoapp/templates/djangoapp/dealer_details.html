@@ -1,18 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dealership Review</title>
-    {% load static %}
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-</head>
+<!-- header -->
+{% include "djangoapp/common/header.html" with page='dealer_details' %}
 
-    <body>
+<body>
+    <!-- Navigation bar -->
+    {% include "djangoapp/common/nav.html" %}
+    
+    <main class="py-3 container pg-details1">
+        <!-- reviews as cards -->
+        {% for review in reviews %}
+            {% if forloop.counter0|divisibleby:"3" %}
+                <div class="row py-3">
+            {% endif %}
+            
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="review-emoji review-{{ review.sentiment.label }}"></div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">{{ review.car_make }}, {{ review.car_model }}</h5>
+                        <h4 class="card-title font-weight-bold">{{ review.car_year }}</h4>
+                        <p class="card-text">{{ review.review }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            {% if forloop.counter0|add:1|divisibleby:"3" %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </main>
+    
+    <!-- footer -->
+    {% include "djangoapp/common/footer.html" %}
 
-    <!--Add a nav bar here -->
-
-    <!-- Add reviews as cards -->
-
-    </body>
-
+    <!-- Javascript -->
+    {% include "djangoapp/common/script.html" %}
+</body>
 </html>
+

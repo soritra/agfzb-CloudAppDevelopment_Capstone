@@ -2,13 +2,14 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
-# from .models import related models
-# from .restapis import related methods
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from datetime import datetime
 import logging
 import json
+
+from .models import CarMake, CarModel
+from .restapis import get_dealers_from_cf, get_dealer_by_id_from_cf, get_review_by_dealer_from_cf, analyze_review_sentiments
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -77,18 +78,40 @@ def registration_request(request):
 
 
 # Update the `get_dealerships` view to render the index page with a list of dealerships
-def get_dealerships(request):
+def get_dealerships(request, state_name=None):
     context = {}
-    if request.method == "GET":
-        return render(request, 'djangoapp/index.html', context)
+    dealerships = get_dealers_from_cf()
+    carmodels = CarModel.objects.all().order_by('-type')
+    context['carmodels'] = carmodels
+    context['dealership_list'] = dealerships
+    return render(request, 'djangoapp/index.html', context)
 
 
 # Create a `get_dealer_details` view to render the reviews of a dealer
-# def get_dealer_details(request, dealer_id):
-# ...
-
+def get_dealer_details(request, dealer_id):
+    context = {}
+    if (dealer_id):
+        dealer = get_dealer_by_id_from_cf(dealer_id)
+        # print(dealer)
+        reviews = get_review_by_dealer_from_cf(dealer_id)
+        # print(reviews)
+        if (reviews):
+            # context['sentiments'] = []
+            for review in reviews:
+                dt = str(review['purchase_date']).split('/')[2]
+                age = int(dt) - int(review['car_year'])
+                pfx = "" if review['purchase'] else "not "
+                txt = "{} {}, {} years old car, {}, {}purchased".format(review['car_make'], review['car_model'], age, review['review'], pfx)
+                # print(dt, txt)
+                sentiment = analyze_review_sentiments(txt)
+                # print(sentiment)
+                review['sentiment'] = sentiment
+        context['reviews'] = reviews
+    # print(context)
+    return render(request, 'djangoapp/dealer_details.html', context)
+    
 
 # Create a `add_review` view to submit a review
-# def add_review(request, dealer_id):
-# ...
+def add_review(request, dealer_id):
+    pass
 

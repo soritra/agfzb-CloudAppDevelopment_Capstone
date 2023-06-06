@@ -9,5 +9,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static '/djangoapp/style.css' %}"/>
+    {% if page == 'dealer_details' %}
+        <style>
+            .review-positive { background-image: url('{{ MEDIA_URL }}/emoji/positive.png'); }
+            .review-neutral { background-image: url('{{ MEDIA_URL }}/emoji/neutral.png'); }
+            .review-negative { background-image: url('{{ MEDIA_URL }}/emoji/negative.png'); }
+        </style>
+    {% endif %}
+    <link rel="icon" type="image/webp" href="{% static '/djangoapp/img/favicon.webp' %}">
 </head>
 
