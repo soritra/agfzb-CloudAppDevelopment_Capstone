@@ -1,12 +1,40 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
-<script src="https://unpkg.com/bootstrap-table@1.18.2/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
 {% if page == 'index' %}
+  <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
+  <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
   <script>
     $(function() {
-      $('#table').bootstrapTable()
+      $('#table').bootstrapTable();
     })
+  </script>
+{% endif %}
+{% if page == 'add_review' %}  
+  <script src="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
+  <script type="text/javascript">
+    $('.date-own').datepicker({
+      format: 'mm/dd/yyyy'
+    });
+    $('#purchase_check').change(function() {
+      const checked = $(this).is(':checked');
+      $('#purchase_date').attr('disabled', !checked);
+    });
+    $('#car').on('change', function() {
+      console.log($(this).children("option:selected").text())
+    });
+    $('#add-review-form').on('submit', function(e) {
+      e.preventDefault();
+      
+      const spinnerEl = `
+        <div style="position:absolute;top:0;right:0;bottom:0;left:0;display:flex;align-items:center;justify-content:center;z-index:5;">
+          <div class="" role="status" style="position:absolute;top:0;right:0;bottom:0;left:0;background-color:#eee;opacity:.7;z-index:-1;"></div>
+          <span class="" style="color:#fff;padding:1rem;background:#2e4e4e;">...Submitting...</span>
+        </div>
+      `;      
+      $(spinnerEl).appendTo($('main'));
+      
+      $(this).unbind('submit').submit();
+    });
   </script>
 {% endif %}

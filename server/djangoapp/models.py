@@ -1,29 +1,53 @@
+import datetime
+# from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.timezone import now
+from multiselectfield import MultiSelectField
 
 
 class CarMake(models.Model):
   name = models.CharField(null=False, max_length=80, default='car make')
   description = models.CharField(max_length=1000)
-# - Any other fields you would like to include in car make model
   
   def __str__(self):
-    return "Car {} - {}".format(self.id, self.name)
+    return "{} - {}".format(self.id, self.name)
     
 
-# <HINT> Create a plain Python class `CarDealer` to hold dealer data
-# class CarDealer:
-#   pass
-
-
-class CarDealer(models.Model):
-  name = models.CharField(null=False, max_length=100, )
+# class `CarDealer` to hold dealer data
+class CarDealer:
+  def __init__(self, address, city, full_name, id, lat, long, short_name, st, zip):
+    # Dealer address
+    self.address = address
+    # Dealer city
+    self.city = city
+    # Dealer Full Name
+    self.full_name = full_name
+    # Dealer id
+    self.id = id
+    # Location lat
+    self.lat = lat
+    # Location long
+    self.long = long
+    # Dealer short name
+    self.short_name = short_name
+    # Dealer state
+    self.st = st
+    # Dealer zip
+    self.zip = zip
   
   def __str__(self):
-    return "Dealer: {}".format(self.name)
+    return "Dealer name: " + self.full_name
 
 
-# <HINT> Create a Car Model model `class CarModel(models.Model):`:
+def year_choices():
+  return [(x, x) for x in range(1980, current_year())]
+
+
+def current_year():
+  return datetime.date.today().year
+
+
+# Car Model model:
 # - Many-To-One relationship to Car Make model (One Car Make has many Car Models, using ForeignKey field)
 # - Name
 # - Dealer id, used to refer a dealer created in cloudant database
@@ -49,25 +73,55 @@ class CarModel(models.Model):
     choices=TYPE_CHOICES,
     default=SEDAN
   )
-  type = models.CharField(null=False, max_length=100, )
-  year = models.DateField(null=True)
+  # year = models.DateField(null=True)
+  year = models.PositiveIntegerField(
+    choices=year_choices(),
+    default=current_year()
+  )
   make = models.ForeignKey(CarMake, on_delete=models.CASCADE)
-  dealer = models.ForeignKey(CarDealer, on_delete=models.CASCADE)
+  DEALER_CHOICES = ((i, i) for i in range(1,51))
+  dealer = MultiSelectField(
+    null=True,
+    choices=DEALER_CHOICES
+  )
   
   def __str__(self):
-    return "Car model: {} - {} (by {})".format(self.name, self.make.name, self.dealer.name)
+    return "{} {} - {}".format(self.make.name, self.name, self.get_type_display())
 
 
-# <HINT> Create a plain Python class `DealerReview` to hold review data
-# class DealerReview:
-#   pass
+# class `DealerReview` to hold review data
+class DealerReview:
+  def __init__(self, id, name, dealership, purchase, purchase_date, car_make, car_model, car_year, review, sentiment):
+    # Dealer id
+    self.id = id
+    # Dealer name
+    self.name = name
+    # Dealership
+    self.dealership = dealership
+    # Dealer purchase
+    self.purchase = purchase
+    # purchase date
+    self.purchase_date = purchase_date
+    # car make
+    self.car_make = car_make
+    # car model
+    self.car_model = car_model
+    # car year
+    self.car_year = car_year
+    # Dealer review
+    self.review = review
+    # Dealer sentiment
+    self.sentiment = sentiment
 
-class DealerReview(models.Model):
-  content = models.TextField()
-  dealer = models.ForeignKey(CarDealer, on_delete=models.CASCADE)
-  date_created_at = models.DateField(default=now)
-  rating = models.FloatField(default=5.0)
-  
   def __str__(self):
-    return "Dealer review: {} (by {})".format(self.content, self.dealer.name)
+    return "Dealer name: " + self.full_name
+
+
+# Hold IBM active token value and expiration
+class ExternalToken(models.Model):
+  id = models.IntegerField(primary_key=True)
+  value = models.TextField()
+  # expiration time in milliseconds
+  expiration = models.IntegerField()
+  # expiration = models.CharField(null=False, default=1, max_length=15)
 

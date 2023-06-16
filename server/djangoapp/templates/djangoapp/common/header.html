@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dr-wrap">
 <head>
     <meta charset="UTF-8">
     <title>Dealership Review</title>
     {% load static %}
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    {% if page == 'index' %}
+        <link href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css" rel="stylesheet" />
+    {% endif %}
+    {% if page == 'add_review' %}
+        <link href="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+    {% endif %}
     <link rel="stylesheet" type="text/css" href="{% static '/djangoapp/style.css' %}"/>
     {% if page == 'dealer_details' %}
         <style>
@@ -15,7 +20,7 @@
             .review-neutral { background-image: url('{{ MEDIA_URL }}/emoji/neutral.png'); }
             .review-negative { background-image: url('{{ MEDIA_URL }}/emoji/negative.png'); }
         </style>
-    {% endif %}
-    <link rel="icon" type="image/webp" href="{% static '/djangoapp/img/favicon.webp' %}">
+    {% endif %}    
+    <link rel="icon" type="image/webp" href="{% static '/djangoapp/img/favicon.webp' %}" />
 </head>
 

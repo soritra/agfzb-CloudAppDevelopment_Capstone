@@ -525,3 +525,13 @@ form .related-widget-wrapper ul {
 .clearable-file-input input {
     margin-top: 0;
 }
+
+/* custom */
+#carmodel_form ul#id_dealer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+#carmodel_form ul#id_dealer li {
+    min-width: 220px;
+}
