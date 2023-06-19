@@ -53,7 +53,6 @@ def current_year():
 # - Dealer id, used to refer a dealer created in cloudant database
 # - Type (CharField with a choices argument to provide limited choices such as Sedan, SUV, WAGON, etc.)
 # - Year (DateField)
-# - Any other fields you would like to include in car model
 # - __str__ method to print a car make object
 class CarModel(models.Model):
   name = models.CharField(null=False, max_length=100, default='car model')
@@ -123,5 +122,4 @@ class ExternalToken(models.Model):
   value = models.TextField()
   # expiration time in milliseconds
   expiration = models.IntegerField()
-  # expiration = models.CharField(null=False, default=1, max_length=15)
 
